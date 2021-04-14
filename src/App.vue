@@ -1,60 +1,54 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+    <v-app-bar app dark color="amber darken-3">
+      <div class="text-center">
+        <v-row class="" color="amber darken-3">
+        <v-btn
+            class="mx-3"
+            v-on:click="toggle='character-viewer'"
+            rounded
+            color=" amber deep-orange darken-3"
+            dark
+        >
+          Personaggi
+        </v-btn>
+        <v-btn
+            class="mx-3"
+            color=" amber deep-orange darken-3"
+            v-on:click="toggle='character-creator'"
+            rounded
+            dark
+        >
+          Crea!
+        </v-btn>
+        </v-row>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <CharacterViewer v-show="toggle==='character-viewer'" />
+      <CharacterCreator v-show="toggle==='character-creator'" />
     </v-main>
+
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import CharacterViewer from './components/CharacterViewer.vue'
+import CharacterCreator from './components/CharacterCreator.vue'
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    CharacterCreator,
+    CharacterViewer,
   },
 
-  data: () => ({
-    //
-  }),
+  data: function () {
+    return {
+      toggle: "character-viewer"
+    }
+  }
 };
 </script>
