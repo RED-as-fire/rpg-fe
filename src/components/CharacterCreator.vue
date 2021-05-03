@@ -18,22 +18,28 @@
     </v-row>
     <v-row class="justify-center">
       <v-card
-          class="d-inline-flex pa-2"
-          elevation="2"
+          class="d-inline-flex pa-2 justify-content-center"
+          elevation="24"
           outlined
-          shaped
       >
-        <div>
-          <label for="character-name">Character Name: </label>
-          <input type="text" id="character-name" v-model="name" placeholder="Enter a name" /> <br /><br />
-          <label for="professions-list">Character Profession: </label>
+        <div class="justify-center">
+          <label for="character-name">Nome del personaggio: </label>
+          <input type="text" id="character-name" v-model="name" placeholder="Inserisci un nome" /> <br /><br />
+          <label for="professions-list">Classe del personaggio: </label>
           <select id="professions-list" v-model="profession">
-            <option value="Mage">Mage</option>
-            <option value="Thief">Thief</option>
-            <option value="Warrior">Warrior</option>
-          </select>
-          <p>{{name}}</p>
-          <p>{{profession}}</p>
+            <option value="Mago">Mago</option>
+            <option value="Ladro">Ladro</option>
+            <option value="Guerriero">Guerriero</option>
+            <option value="Paladino">Paladino</option>
+            <option value="Chierico">Chierico</option>
+          </select> <br/> <br />
+          <label for="character-life">Vitalità: </label>
+          <input type="text" id="character-life" v-model="life" placeholder="Inserisci un valore" /> <br /><br />
+          <label for="character-res">Resistenza: </label>
+          <input type="text" id="character-res" v-model="res" placeholder="Inserisci un valore" /> <br /><br />
+          <label for="character-weapon">Arma di inizio: </label>
+          <input type="text" id="character-weapon" v-model="weapon" placeholder="Inserisci un'arma" /> <br /><br />
+          <v-btn v-on:click="postCharacter">Crea!</v-btn>
         </div>
       </v-card>
     </v-row>
@@ -41,7 +47,34 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'CharacterCreator',
+  data: function () {
+    return {
+      name: null,
+      profession: null,
+      life: null,
+      res: null,
+      weapon: null,
+    }
+  },
+  methods: {
+    postCharacter: function () {
+      axios
+          .post('http://localhost:3000/characters', {
+            name: this.name,
+            profession: this.profession,
+            life: this.life,
+            res: this.res,
+            weapon: this.weapon
+          });
+    }
+  }
 }
 </script>
+
+<style>
+
+</style>
